@@ -114,7 +114,7 @@ include_directories(${HDF5_INCLUDE_DIRS})
 target_link_libraries(${PLUGIN_NAME} ${HDF5_LIBRARIES} ${HDF5_CXX_LIBRARIES})
 target_include_directories(${PLUGIN_NAME} PRIVATE ${HDF5_INCLUDE_DIRS})
 
-target_include_directories(${PLUGIN_NAME} PUBLIC ../OpenEphysHDF5Lib/Source)
+#target_include_directories(${PLUGIN_NAME} PUBLIC ../OpenEphysHDF5Lib/Source)
 
 # Open Ephys common libraries
 include(link_open_ephys_lib.cmake)
