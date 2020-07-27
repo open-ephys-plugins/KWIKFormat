@@ -36,6 +36,7 @@ public:
     void openFiles(File rootFolder, int experimentNumber, int recordingNumber) override;
 	void closeFiles() override;
 	void writeData(int writeChannel, int realChannel, const float* buffer, int size) override;
+	void writeSynchronizedData(int writeChannel, int realChannel, const float* dataBuffer, const float* ftsBuffer, int size) override;
 	void writeEvent(int eventType, const MidiMessage& event) override;
 	void writeTimestampSyncText(uint16 sourceID, uint16 sourceIdx, int64 timestamp, float, String text) override;
 	void addDataChannel(int index, const DataChannel* chan) override;
