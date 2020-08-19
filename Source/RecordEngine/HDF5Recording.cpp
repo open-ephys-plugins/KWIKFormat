@@ -226,7 +226,7 @@ void HDF5Recording::writeData(int writeChannel, int realChannel, const float* bu
 	channelLeftOverSamples.set(writeChannel, (size + sampleOffset) % TIMESTAMP_EACH_NSAMPLES);
 }
 
-void HDF5Recording::writeSynchronizedData(int writeChannel, int realChannel, const float* dataBuffer, const float* ftsBuffer, int size)
+void HDF5Recording::writeSynchronizedData(int writeChannel, int realChannel, const float* dataBuffer, const double* ftsBuffer, int size)
 {
 	//empty;
 }
