@@ -97,6 +97,12 @@ void HDF5Recording::openFiles(File rootFolder, int experimentNumber, int recordi
     //KWX file
     spikesFile->initFile(basepath);
     spikesFile->open();
+    int nSpikes = getNumRecordedSpikes();
+    for (int i = 0; i < nSpikes; i++)
+    {
+         spikesFile->addChannelGroup(getSpikeChannel(i)->getNumChannels()); 
+    }
+
     spikesFile->startNewRecording(recordingNumber);
 
     //Let's just put the first processor (usually the source node) on the KWIK for now
@@ -272,7 +278,7 @@ void HDF5Recording::writeTimestampSyncText(uint16 sourceID, uint16 sourceIdx, in
 
 void HDF5Recording::addSpikeElectrode(int index, const SpikeChannel* elec)
 {
-    spikesFile->addChannelGroup(elec->getNumChannels());
+    //spikesFile->addChannelGroup(elec->getNumChannels()); // deprecated
 }
 void HDF5Recording::writeSpike(int electrodeIndex, const SpikeEvent* spike)
 {

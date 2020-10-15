@@ -320,6 +320,7 @@ void KWXFile::initFile(String basename)
     if (isOpen()) return;
     filename = basename + ".kwx";
     readyToOpen=true;
+    numElectrodes = 0;
 }
 
 int KWXFile::createFileStructure()
@@ -338,7 +339,7 @@ int KWXFile::createFileStructure()
 void KWXFile::addChannelGroup(int nChannels)
 {
     channelArray.add(nChannels);
-    numElectrodes++;
+    createChannelGroup(numElectrodes++);
 }
 
 int KWXFile::createChannelGroup(int index)
