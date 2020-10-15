@@ -9,7 +9,7 @@ This plugin depends on the [OpenEphysHDF5Lib](https://github.com/open-ephys-plug
 Building the plugins requires [CMake](https://cmake.org/). Detailed instructions on how to build open ephys plugins with CMake can be found in [our wiki](https://open-ephys.atlassian.net/wiki/spaces/OEW/pages/1259110401/Plugin+CMake+Builds).
 
 #### [MacOS only] Update rpaths
-Update the rpaths of HDF5 libraries linked to `KWIKFormat.bundle` by running the following commands:
+After builing and installing the plugin with INSTALL scheme, update the rpaths of HDF5 libraries linked to `KWIKFormat.bundle` at `${YOUR_HOME_DIR}/Library/Application Support/open-ephys/plugins` by running the following commands:
 ```
 install_name_tool -change /usr/local/lib/libhdf5.10.dylib @rpath/libhdf5.10.dylib path/to/KWIKFormat.bundle/Contents/MacOS/KWIKFormat
 ```
