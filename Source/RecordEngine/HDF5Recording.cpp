@@ -92,16 +92,19 @@ void HDF5Recording::openFiles(File rootFolder, int experimentNumber, int recordi
     String basepath = rootFolder.getFullPathName() + rootFolder.separatorString + "experiment" + String(experimentNumber);
     //KWE file
     eventFile->initFile(basepath);
-    eventFile->open();
+    eventFile->open(); // calls createFileStructure
 
     //KWX file
     spikesFile->initFile(basepath);
-    spikesFile->open();
+    
     int nSpikes = getNumRecordedSpikes();
     for (int i = 0; i < nSpikes; i++)
     {
          spikesFile->addChannelGroup(getSpikeChannel(i)->getNumChannels()); 
     }
+
+    spikesFile->open(); // calls createFileStructure
+
 
     spikesFile->startNewRecording(recordingNumber);
 

@@ -278,26 +278,33 @@ void KWXFile::initFile(String basename)
     if (isOpen()) return;
     filename = basename + ".kwx";
     readyToOpen=true;
+    channelArray.clear();
     numElectrodes = 0;
 }
 
 int KWXFile::createFileStructure()
 {
+    std::cout << "Creating file structure." << std::endl;
+
     const uint16 ver = 2;
     if (createGroup("/channel_groups")) return -1;
 	if (setAttribute(BaseDataType::U16, (void*)&ver, "/", "kwik_version")) return -1;
-    for (int i=0; i < channelArray.size(); i++)
+
+    for (int i = 0; i < channelArray.size(); i++)
     {
         int res = createChannelGroup(i);
         if (res) return -1;
     }
+
     return 0;
 }
 
 void KWXFile::addChannelGroup(int nChannels)
 {
+    std::cout << "Adding spike group with " << nChannels << " channels." << std::endl;
     channelArray.add(nChannels);
-    createChannelGroup(numElectrodes++);
+    numElectrodes++;
+    //createChannelGroup(numElectrodes++);
 }
 
 int KWXFile::createChannelGroup(int index)
@@ -321,7 +328,7 @@ void KWXFile::startNewRecording(int recordingNumber)
     String path;
     this->recordingNumber = recordingNumber;
 
-    for (int i=0; i < channelArray.size(); i++)
+    for (int i = 0; i < channelArray.size(); i++)
     {
         path = "/channel_groups/"+String(i);
         dSet=getDataSet(path+"/waveforms_filtered");
@@ -344,12 +351,14 @@ void KWXFile::stopRecording()
     spikeArray.clear();
     timeStamps.clear();
     recordingArray.clear();
+
 }
 
 void KWXFile::resetChannels()
 {
     stopRecording(); //Just in case
-    channelArray.clear();
+    
+    
 }
 
 void KWXFile::writeSpike(int groupIndex, int nSamples, const float* data, Array<float>& bitVolts, int64 timestamp)
